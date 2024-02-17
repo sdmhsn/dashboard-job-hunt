@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Epilogue } from 'next/font/google';
 import './globals.css';
 import SideBar from '@/components/layouts/Sidebar';
+import Header from '@/components/layouts/Header';
 
-const inter = Inter({ subsets: ['latin'] });
+const epilogue = Epilogue({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -17,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={epilogue.className}>
         <main>
           {/* border-t -> border-width-top: 1px */}
           <div className="border-t">
@@ -32,7 +33,7 @@ export default function RootLayout({
                 <div className="col-span-3 overflow-auto lg:col-span-5 lg:border-l w-[82%]">
                   {/* px-6 py-6 -> padding top-bottom and left-right: 1.5rem for sm breakpoint, lg:px-8 -> padding left-right: 2rem for lg breakpoint */}
                   <div className="px-6 py-6 lg:px-8">
-                    <div>Header</div>
+                    <Header />
                     {children}
                   </div>
                 </div>
