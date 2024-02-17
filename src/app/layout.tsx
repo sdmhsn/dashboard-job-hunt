@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
+import SideBar from '@/components/layouts/Sidebar';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -24,7 +25,9 @@ export default function RootLayout({
               {/* flex-row -> to position flex items (Sidebar & Header) horizontally in the same direction as text */}
               <div className="flex flex-row">
                 {/* hidden -> hide Sidebar item (display: none) for sm and md breakpoint, lg:block -> show Sidebar item (display: block) for lg and over breakpoint, w-[18%] -> width: 18% */}
-                <div className="hidden lg:block w-[18%]">Sidebar</div>
+                <div className="hidden lg:block w-[18%]">
+                  <SideBar />
+                </div>
                 {/* col-span-3 -> grid-column: span 3 for sm breakpoint, overflow-auto -> to add scrollbars to an element in the event that its content overflows, lg:col-span-5 -> grid-column: span 5 for lg breakpoint, lg:border-l -> border-left-width: 1px for lg breakpoint, w-[82%] -> width: 82% */}
                 <div className="col-span-3 overflow-auto lg:col-span-5 lg:border-l w-[82%]">
                   {/* px-6 py-6 -> padding top-bottom and left-right: 1.5rem for sm breakpoint, lg:px-8 -> padding left-right: 2rem for lg breakpoint */}
