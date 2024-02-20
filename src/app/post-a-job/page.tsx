@@ -27,6 +27,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import InputSkills from '@/components/organisms/InputSkills';
 
 interface PostJobPageProps {}
 
@@ -186,6 +187,13 @@ const PostJobPage: FC<PostJobPageProps> = ({}) => {
                 </FormItem>
               )}
             />
+          </FieldInput>
+
+          <FieldInput
+            title="Required Skills"
+            subtitle="Add required skills for the job."
+          >
+            <InputSkills form={form} />
           </FieldInput>
         </form>
       </Form>
