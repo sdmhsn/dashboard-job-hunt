@@ -41,6 +41,7 @@ const PostJobPage: FC<PostJobPageProps> = ({}) => {
     resolver: zodResolver(jobFormSchema),
     defaultValues: {
       requiredSkills: [],
+      benefits: [], // to able the benefits input validation message (.nonempty({ message: 'Benefits must be at least 1 benefit' }) in form schema)
     },
   });
 
