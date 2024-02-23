@@ -11,8 +11,7 @@ import {
 } from '@/components/ui/table';
 import { JOB_LISTINGS_COLUMN, JOB_LISTINGS_DATA } from '@/constants';
 import { Badge } from '@/components/ui/badge';
-import { MoreVertical } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import ButtonActionTable from '@/components/organisms/ButtonActionTables';
 
 interface JobListingsProps {}
 
@@ -27,14 +26,15 @@ const JobListings: FC<JobListingsProps> = ({}) => {
           <TableHeader>
             <TableRow>
               {JOB_LISTINGS_COLUMN.map((item: string, i: number) => {
-                return <TableHead key={i + 1}>{item}</TableHead>;
+                return <TableHead key={item + i}>{item}</TableHead>;
               })}
+              <TableHead>Action</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {JOB_LISTINGS_DATA.map((item: any, i: number) => {
               return (
-                <TableRow key={i + 1}>
+                <TableRow key={item.roles + i}>
                   <TableCell>{item.roles}</TableCell>
                   <TableCell>
                     <Badge>{item.status}</Badge>
@@ -49,9 +49,7 @@ const JobListings: FC<JobListingsProps> = ({}) => {
                     {item.applicants} / {item.needs}
                   </TableCell>
                   <TableCell>
-                    <Button size="icon" variant="outline">
-                      <MoreVertical className="w-4 h-4" />
-                    </Button>
+                    <ButtonActionTable url="/job-detail/1" />
                   </TableCell>
                 </TableRow>
               );
