@@ -31,6 +31,7 @@ import InputSkills from '@/components/organisms/InputSkills';
 import CKEditor from '@/components/organisms/CKEditor';
 import InputBenefits from '@/components/organisms/InputBenefits';
 import { Button } from '@/components/ui/button';
+import TitleForm from '@/components/atoms/TitleForm';
 
 interface PostJobPageProps {}
 
@@ -60,12 +61,10 @@ const PostJobPage: FC<PostJobPageProps> = ({}) => {
         <span className="text-2xl font-semibold">Post a Job</span>
       </div>
 
-      <div className="my-5">
-        <div className="text-lg font-semibold">Basic Information</div>
-        <div className="text-gray-400">
-          List out your top perks and benefits.
-        </div>
-      </div>
+      <TitleForm
+        title={'Basic Information'}
+        subtitle={'List out your top perks and benefits.'}
+      />
 
       <Separator />
 
