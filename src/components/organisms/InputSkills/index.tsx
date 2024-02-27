@@ -8,17 +8,16 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { jobFormSchema } from '@/lib/form-schema';
 import { PlusIcon } from 'lucide-react';
-import { FC, useEffect, useRef, useState } from 'react';
-import { UseFormReturn } from 'react-hook-form';
-import { z } from 'zod';
+import { FC, useRef, useState } from 'react';
 
 interface InputSkillsProps {
-  form: UseFormReturn<z.infer<typeof jobFormSchema>>;
+  form: any;
+  name: string;
+  label: string;
 }
 
-const InputSkills: FC<InputSkillsProps> = ({ form }) => {
+const InputSkills: FC<InputSkillsProps> = ({ form, name, label }) => {
   const [isHide, setHide] = useState<boolean>(false);
   const [values, setValues] = useState<string[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -34,23 +33,23 @@ const InputSkills: FC<InputSkillsProps> = ({ form }) => {
 
     setValues(newValue);
 
-    form.setValue('requiredSkills', newValue);
+    form.setValue(name, newValue);
   };
 
   const handleDeleteValue = (item: string) => {
     const skills: any = values.filter((value: string) => item !== value);
 
     setValues(skills);
-    form.setValue('requiredSkills', skills);
+    form.setValue(name, skills);
   };
 
   return (
     <FormField
       control={form.control}
-      name={'requiredSkills'}
+      name={name}
       render={({ field }) => (
         <FormItem>
-          <FormLabel className="block">Add Skills</FormLabel>
+          <FormLabel className="block">{label}</FormLabel>
           <FormControl>
             <>
               <Button
@@ -60,7 +59,7 @@ const InputSkills: FC<InputSkillsProps> = ({ form }) => {
                 onClick={() => setHide(!isHide)}
               >
                 <PlusIcon className="w-4 h-4 mr-2" />
-                Add skills
+                {label}
               </Button>
               {isHide && (
                 <div className="my-4 flex flex-row gap-4">
