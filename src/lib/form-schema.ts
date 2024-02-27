@@ -49,7 +49,7 @@ export const overViewFormSchema = z.object({
   industry: z.string({ required_error: 'Industry is required' }),
   dateFounded: z.date({ required_error: 'Date founded is required' }),
   techStack: z
-    .string()
+    .string({ required_error: 'Tech stack is required' })
     .array()
     .nonempty({ message: 'Tech stack must be at least 1 data' }),
   description: z.string({ required_error: 'Description is required' }),
