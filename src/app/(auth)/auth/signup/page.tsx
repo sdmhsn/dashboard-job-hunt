@@ -15,16 +15,45 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { useRouter } from 'next/navigation';
 
 interface SignUpPageProps {}
 
 const SignUpPage: FC<SignUpPageProps> = ({}) => {
   const form = useForm<z.infer<typeof signUpFormSchema>>({
     resolver: zodResolver(signUpFormSchema),
+    defaultValues: {
+      name: '',
+      email: '',
+      password: '',
+    },
   });
+  const router = useRouter();
 
-  const onSubmit = (val: z.infer<typeof signUpFormSchema>) => {
-    console.log(val);
+  const onSubmit = async (val: z.infer<typeof signUpFormSchema>) => {
+    try {
+      let response = await fetch('/api/company/new-user', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(val),
+      });
+
+      if (!response.ok) {
+        // console.log(response);
+        if (response.status === 500) {
+          // throw new Error(`Email error!`);
+          throw new Error(`Email already in use`);
+        } else {
+          throw new Error(`Sign up error in status code: ${response.status}`);
+        }
+      }
+
+      router.push('/auth/signin');
+    } catch (error: any) {
+      console.log(error);
+    }
   };
 
   return (
