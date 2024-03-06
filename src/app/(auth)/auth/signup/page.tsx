@@ -16,6 +16,7 @@ import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { useRouter } from 'next/navigation';
+import { useToast } from '@/components/ui/use-toast';
 
 interface SignUpPageProps {}
 
@@ -29,6 +30,7 @@ const SignUpPage: FC<SignUpPageProps> = ({}) => {
     },
   });
   const router = useRouter();
+  const { toast } = useToast();
 
   const onSubmit = async (val: z.infer<typeof signUpFormSchema>) => {
     try {
@@ -52,7 +54,8 @@ const SignUpPage: FC<SignUpPageProps> = ({}) => {
 
       router.push('/auth/signin');
     } catch (error: any) {
-      console.log(error);
+      // console.log(error);
+      toast({ title: error.message, description: 'Please Try Again.' });
     }
   };
 
