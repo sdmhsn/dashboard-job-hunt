@@ -13,6 +13,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await getServerSession(authOptions);
+  // console.log(session); // e.g. { user: { name: 'Saddam', email: 'saddam@gmail.com', image: undefined, id: 'cltfajg5i000k8iw8ge8qbzoy' } }
 
   if (session !== null) {
     return redirect('/');

@@ -20,6 +20,8 @@ export const authOptions: NextAuthOptions = {
           },
         });
 
+        // console.log(user);
+
         if (!user) {
           return null;
         }
@@ -38,11 +40,17 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   pages: {
-    signIn: 'auth/signin',
-    newUser: 'auth/signup',
+    signIn: '/auth/signin',
+    newUser: '/auth/signup',
   },
   callbacks: {
-    jwt({ token, account, user }) {
+    async jwt({ token, account, user }) {
+      // console.log(token);
+      // console.log('-----');
+      // console.log(account);
+      // console.log('-----');
+      // console.log(user);
+
       if (account) {
         token.id = user.id;
       }
@@ -50,7 +58,12 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     async session({ session, token, user }) {
-      session.user.id = token.id;
+      // console.log(session); // without id: e.g. { user: { name: 'Saddam', email: 'saddam@gmail.com', image: undefined }, expires: '2024-04-09T06:24:12.334Z' }
+      // console.log(session.user.id); // undefined
+      session.user.id = token.id; // session.user.id value assignment. the user id of session.user.id is defined inside next-auth.d.ts file
+      // console.log(session.user.id); // e.g. cltfajg5i000k8iw8ge8qbzoy
+      // console.log(session); // with id: e.g. { user: { name: 'Saddam', email: 'saddam@gmail.com', image: undefined, id: 'cltfajg5i000k8iw8ge8qbzoy' }, expires: '2024-04-09T06:24:12.334Z' }
+      // console.log('-------');
 
       return session;
     },
